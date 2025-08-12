@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/core/utils/pick_image.dart';
-import 'package:blog_app/features/blog/data/domain/presentation/widgets/blog_editor.dart';
+import 'package:blog_app/features/blog/presentation/widgets/blog_editor.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 

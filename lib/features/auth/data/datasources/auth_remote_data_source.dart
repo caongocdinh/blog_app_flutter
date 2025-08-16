@@ -14,6 +14,7 @@ abstract interface class AuthRemoteDataSource {
     required String password,
   });
   Future<UserModel?> getCurrentUserData();
+  Future<void> logout(); // Thêm method logout
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -44,6 +45,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return UserModel.fromJSon(response.user!.toJson()).copyWith(
         email: response.user!.email,
       );
+    } on AuthException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -65,6 +68,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return UserModel.fromJSon(response.user!.toJson()).copyWith(
         email: response.user!.email,
       );
+    } on AuthException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -87,4 +92,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw ServerException(e.toString());
     }
   }
+
+  @override
+  Future<void> logout() async {
+    try {
+      await supabaseClient.auth.signOut();
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+
 }

@@ -1,3 +1,4 @@
+import 'package:blog_app/init_dependencies.dart';
 import 'package:flutter/material.dart';
 
 class BlogEditor extends StatelessWidget {
@@ -15,8 +16,15 @@ class BlogEditor extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
+        
       ),
       maxLines: null, // Allow multiple lines,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return '$hintText không được bỏ trống'; // Validation message
+        }
+        return null;
+      }
     );
   }
 }
